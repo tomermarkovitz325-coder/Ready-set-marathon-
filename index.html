@@ -1,0 +1,396 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#f4f8ff"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="ready,set, Marathon!">
+<link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" href="icon-192.png"><title>ready,set, Marathon!</title>
+<style>
+:root{color-scheme:dark;--bg:#101116;--surface:#191a22;--surface2:#22232d;--line:#30313d;--text:#f5f3f8;--muted:#a6a3b0;--accent:#a78bca;--accent2:#c2addd;--good:#72c9a7;--warn:#e7bc72;--danger:#d98591;--shadow:0 12px 34px #0003}
+:root[data-theme="light"]{color-scheme:light;--bg:#f3f1f5;--surface:#fff;--surface2:#eeebf2;--line:#dfdbe5;--text:#24212b;--muted:#77717f;--accent:#8062a8;--accent2:#9a7cbd;--good:#348b6b;--warn:#a8792c;--danger:#b65465;--shadow:0 10px 28px #30243a12}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;min-height:100vh;padding:env(safe-area-inset-top) 17px 28px;transition:background .2s,color .2s}main{max-width:560px;margin:auto;padding:18px 0 20px}.top{position:relative;display:flex;align-items:center;justify-content:space-between;margin:4px 2px 25px}.brand{font-size:11px;letter-spacing:.2em;color:var(--muted);font-weight:700}.top-actions{display:flex;gap:8px}.icon-btn{width:38px;height:38px;border:1px solid var(--line);background:var(--surface);color:var(--text);border-radius:50%;font-size:17px}.page{display:none}.page.active{display:block}.panel{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:19px;margin:12px 0;box-shadow:var(--shadow)}.center{text-align:center}.eyebrow{font-size:11px;color:var(--muted);letter-spacing:.12em}.section-name{font-size:20px;font-weight:650;margin:12px 0 0}.clock{font-size:clamp(68px,19vw,94px);font-weight:350;letter-spacing:-.065em;font-variant-numeric:tabular-nums;line-height:1.12;margin:12px 0 10px}.total{font-size:13px;color:var(--muted)}.total b{color:var(--text);font-weight:600}.progress{height:4px;background:var(--surface2);border-radius:10px;overflow:hidden;margin:22px 0 9px}.progress>div{height:100%;background:var(--accent);width:0;transition:width .25s}.meta{display:flex;justify-content:space-between;color:var(--muted);font-size:11px}.controls{display:flex;justify-content:center;gap:14px;margin:30px 0 6px}.round{width:52px;height:52px;border-radius:50%;border:1px solid var(--line);background:var(--surface2);color:var(--text);font-size:19px}.round.primary{background:var(--accent);border-color:var(--accent);color:white;width:60px;height:60px;font-size:21px}.round:disabled{opacity:.35}.btn{border:1px solid var(--line);border-radius:13px;background:var(--surface2);color:var(--text);font-size:14px;font-weight:600;padding:13px 15px;min-height:46px}.btn.primary{background:var(--accent);border-color:var(--accent);color:white}.finish-action{margin-top:14px;background:transparent;border-color:var(--line);color:var(--muted);font-size:12px;min-height:40px}.btn.full{width:100%}.btn-row{display:flex;gap:9px;margin-top:13px}.btn-row>*{flex:1}.page-title{font-size:23px;font-weight:700;margin:6px 0 5px}.page-sub{font-size:12px;color:var(--muted);margin-bottom:20px}.section-list{display:grid;gap:7px;margin-top:20px}.part{display:flex;align-items:center;justify-content:space-between;padding:12px 13px;background:var(--surface2);border:1px solid transparent;border-radius:12px;font-size:13px}.part.active{border-color:var(--accent)}.part.done{opacity:.55}.part small,.muted{color:var(--muted)}.mark{padding:14px 0;border-bottom:1px solid var(--line);font-size:13px;line-height:1.6}.mark:last-child{border:0}.mark-groups{display:grid;gap:13px}.mark-group{--mark-accent:var(--accent);background:var(--surface);border:1px solid var(--line);border-right:4px solid var(--mark-accent);border-radius:16px;padding:13px 14px;min-width:0}.mark-group[data-tone="1"]{--mark-accent:#16876d}.mark-group[data-tone="2"]{--mark-accent:#b87518}.mark-group[data-tone="3"]{--mark-accent:#8b67cf}.mark-group[data-tone="4"]{--mark-accent:#d05c83}.mark-group[data-tone="5"]{--mark-accent:#1689a8}.mark-group[data-tone="6"]{--mark-accent:#6478d8}.mark-group-head{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:1px 0 7px;color:var(--mark-accent);font-weight:800;font-size:13px}.mark-group-head small{font-size:10px;font-weight:650;color:var(--muted);background:var(--surface2);padding:4px 8px;border-radius:99px}.mark-entry{padding:12px 0;border-top:1px solid var(--line)}.mark-entry:first-of-type{border-top:0}.mark-time{font-size:12px;line-height:1.7}.mark-index{display:inline-grid;place-items:center;width:23px;height:23px;border-radius:8px;background:color-mix(in srgb,var(--mark-accent) 13%,var(--surface));color:var(--mark-accent);font-weight:850;margin-left:5px}.mark-note{display:block;width:100%;min-height:54px;margin-top:9px;padding:10px 11px;border:1px solid var(--line);border-radius:11px;background:var(--surface2);color:var(--text);font-family:inherit;font-size:13px;line-height:1.55;resize:vertical}.mark-note:focus{outline:2px solid color-mix(in srgb,var(--mark-accent) 45%,transparent);border-color:var(--mark-accent)}.mark-note-state{font-size:10px;color:var(--muted);margin-top:4px;text-align:left}.mark b{color:var(--accent)}.empty{color:var(--muted);font-size:13px;padding:16px 2px}.history-item{display:flex;width:100%;align-items:center;justify-content:space-between;text-align:right;background:var(--surface);border:1px solid var(--line);border-radius:15px;padding:15px;color:var(--text);margin:8px 0}.history-item strong{display:block;font-size:14px;margin-bottom:5px}.history-item small{font-size:11px;color:var(--muted)}.chevron{font-size:20px;color:var(--muted)}.bottom-nav{position:fixed;z-index:20;bottom:0;left:0;right:0;padding:8px 12px calc(8px + env(safe-area-inset-bottom));background:var(--bg);border-top:1px solid var(--line);box-shadow:0 -6px 18px rgba(0,0,0,.16);display:flex;justify-content:center}.nav-inner{width:100%;max-width:560px;display:grid;grid-template-columns:repeat(3,1fr);gap:5px}.nav-btn{border:0;background:transparent;color:var(--muted);padding:7px 3px 5px;border-radius:12px;font-size:10px}.nav-btn .nav-icon{display:block;font-size:19px;margin-bottom:4px}.nav-btn.active{color:var(--accent);background:var(--surface)}
+.page-menu-toggle{width:40px;height:38px;border:1px solid var(--line);background:var(--surface);color:var(--text);border-radius:12px;font-size:20px;line-height:1}
+.page-menu{position:absolute;z-index:50;top:calc(100% + 9px);left:0;width:min(230px,72vw);padding:7px;background:var(--surface);border:1px solid var(--line);border-radius:16px;box-shadow:0 14px 36px #0008}
+.page-menu[hidden]{display:none!important}
+.page-menu button{display:flex;width:100%;align-items:center;gap:11px;padding:13px 12px;border:0;border-radius:10px;background:transparent;color:var(--text);text-align:right;font:600 14px -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}
+.page-menu button:active,.page-menu button.active{background:var(--surface2);color:var(--accent)}
+.page-menu .menu-icon{width:22px;text-align:center;font-size:17px}
+
+.hidden{display:none!important}.detail-head{display:flex;align-items:center;justify-content:space-between;gap:8px}.detail-title{font-size:19px;font-weight:700}.setting-row{display:flex;align-items:center;justify-content:space-between;padding:15px 0;border-bottom:1px solid var(--line);font-size:14px}.setting-row:last-child{border:0}.switch{display:flex;gap:4px;padding:4px;border:1px solid var(--line);background:var(--surface2);border-radius:30px}.switch button{border:0;border-radius:22px;padding:9px 13px;background:transparent;color:var(--muted);font-size:12px}.switch button.selected{background:var(--accent);color:white}textarea{width:100%;min-height:180px;resize:vertical;background:var(--surface2);color:var(--text);border:1px solid var(--line);border-radius:12px;padding:12px;font:13px/1.6 inherit}.notice{font-size:11px;color:var(--muted);line-height:1.5;margin-top:12px}h2{font-size:15px;margin:0 0 10px}
+
+/* 5.1 additions */
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field{display:flex;flex-direction:column;gap:6px}.field label{font-size:13px;color:var(--muted)}.field input,.field select,.field textarea{width:100%;box-sizing:border-box;border:1px solid var(--line);background:var(--surface2);color:var(--text);border-radius:12px;padding:12px;font:inherit}.field textarea{min-height:76px;resize:vertical}.wide{grid-column:1/-1}.subnav{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}.metric-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.metric{background:var(--surface2);border:1px solid var(--line);padding:13px;border-radius:14px}.metric strong{font-size:24px;display:block;margin-top:4px}.muted-note{font-size:12px;color:var(--muted);line-height:1.5}.danger-btn{color:var(--danger)}.backup-status{font-size:12px;color:var(--muted);margin-top:8px}.pill{display:inline-block;border:1px solid var(--line);padding:4px 8px;border-radius:999px;font-size:11px;color:var(--muted)}
+@media(max-width:430px){.form-grid{grid-template-columns:1fr}.wide{grid-column:auto}}
+
+/* 5.1 Bright Minimalism visual refresh */
+:root{color-scheme:light;--bg:#f4f8ff;--surface:#ffffff;--surface2:#eaf2ff;--line:#d8e5f7;--text:#10294b;--muted:#617895;--accent:#1769e0;--accent2:#58a4ff;--good:#16876d;--warn:#b87518;--danger:#c43d58;--shadow:0 10px 28px rgba(22,75,145,.075)}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#101d31;--surface:#172a44;--surface2:#203a5d;--line:#2d4a70;--text:#f4f8ff;--muted:#a9bdd7;--accent:#65a8ff;--accent2:#9bc9ff;--good:#72c9a7;--warn:#e7bc72;--danger:#ff879a;--shadow:0 12px 34px #0003}
+html{background:var(--bg);scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;letter-spacing:-.012em;transition:background .28s ease,color .28s ease}
+main{max-width:600px;padding-top:22px;padding-bottom:110px}
+.top{margin:5px 2px 22px;min-height:44px}
+.brand{font-size:10px;letter-spacing:.17em;color:#9298ad;font-weight:900}
+.icon-btn,.page-menu-toggle{background:var(--surface);border-color:var(--line);box-shadow:0 2px 8px rgba(42,48,82,.035);transition:transform .18s ease,background .2s ease,border-color .2s ease}
+.icon-btn:active,.page-menu-toggle:active,.btn:active,.round:active{transform:scale(.97)}
+.panel{border:1px solid var(--line);border-radius:24px;padding:21px;background:var(--surface);box-shadow:var(--shadow);margin:13px 0;transition:background .25s ease,border-color .25s ease,box-shadow .25s ease}
+.page-title{font-size:25px;letter-spacing:-.04em;font-weight:850}
+.page-sub{font-size:13px;color:var(--muted);line-height:1.55}
+.eyebrow{font-size:10px;font-weight:750;letter-spacing:.13em;color:#969bb0}
+.section-name{font-size:19px;font-weight:700;letter-spacing:-.025em}
+.clock{font-size:clamp(72px,20vw,100px);font-weight:420;letter-spacing:-.075em;color:var(--text);font-variant-numeric:tabular-nums;margin:13px 0 8px}
+.total{font-size:12px;color:var(--muted)}
+.progress{height:5px;background:var(--surface2);border-radius:20px;margin:23px 0 10px}
+.progress>div{background:linear-gradient(90deg,var(--accent),#a99df4);border-radius:20px;transition:width .35s cubic-bezier(.2,.75,.25,1)}
+.round{width:50px;height:50px;border:1px solid var(--line);background:var(--surface2);color:var(--text);transition:transform .18s ease,background .2s ease}
+.round.primary{width:60px;height:60px;background:var(--accent);border-color:var(--accent);box-shadow:0 7px 16px rgba(120,105,223,.22)}
+.btn{border:1px solid var(--line);border-radius:14px;background:var(--surface2);color:var(--text);font-weight:650;transition:transform .18s ease,background .2s ease,border-color .2s ease,box-shadow .2s ease}
+.btn.primary{background:var(--accent);border-color:var(--accent);box-shadow:0 6px 16px rgba(120,105,223,.18)}
+.btn.primary:hover{box-shadow:0 9px 22px rgba(120,105,223,.24)}
+.part,.metric{background:var(--surface2);border:1px solid transparent;border-radius:15px;transition:background .22s ease,border-color .22s ease}
+.part.active{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 8%,var(--surface2))}
+.history-item{background:var(--surface);border-color:var(--line);border-radius:17px;transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease}
+.history-item:hover{transform:translateY(-1px);border-color:color-mix(in srgb,var(--accent) 40%,var(--line));box-shadow:var(--shadow)}
+.bottom-nav{background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-top:1px solid color-mix(in srgb,var(--line) 80%,transparent);box-shadow:0 -5px 22px rgba(42,48,82,.035)}
+.nav-btn{font-size:11px;font-weight:650;transition:color .2s ease,background .2s ease}
+.nav-btn.active{background:var(--surface);color:var(--accent);box-shadow:0 2px 9px rgba(42,48,82,.06)}
+.page-menu{background:var(--surface);border-color:var(--line);box-shadow:0 16px 38px rgba(42,48,82,.13);border-radius:18px;animation:menuIn .18s ease both}
+.page-menu button{border-radius:12px}
+.field input,.field select,.field textarea,textarea{background:var(--surface2);border-color:var(--line);border-radius:13px;outline:none;transition:border-color .2s ease,box-shadow .2s ease}
+.field input:focus,.field select:focus,.field textarea:focus,textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 13%,transparent)}
+.pill{background:var(--surface2)}
+.score-record{margin-top:18px;padding-top:16px;border-top:1px solid var(--line)}.score-record h2{font-size:16px;font-weight:900;color:var(--accent);margin-bottom:10px}.score-record .part{margin:7px 0}.score-record .part strong{color:var(--accent);font-size:19px;font-weight:950}
+.page.active{animation:pageIn .24s ease both}
+@keyframes pageIn{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+@keyframes menuIn{from{opacity:0;transform:translateY(-4px) scale(.985)}to{opacity:1;transform:translateY(0) scale(1)}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+
+.score-preview{margin-top:14px;background:var(--surface2);text-align:center}.score-number{font-size:48px;font-weight:750;letter-spacing:-.04em;color:var(--accent);margin:5px 0}.score-breakdown{display:flex;justify-content:space-around;gap:8px;flex-wrap:wrap;color:var(--muted);font-size:12px}.score-breakdown b{display:block;color:var(--text);font-size:16px;margin-top:3px}
+
+/* READY, SET, MARATHON! · Blue / white visual system */
+:root{color-scheme:light;--bg:#f4f8ff;--surface:#fff;--surface2:#edf4ff;--line:#dce8f7;--text:#10294b;--muted:#66809f;--accent:#1769e0;--accent2:#69a7ff;--good:#16856b;--warn:#b87818;--danger:#c83f59;--shadow:0 8px 24px rgba(23,73,130,.075)}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#0d1b2d;--surface:#142640;--surface2:#1a3150;--line:#294361;--text:#f4f8ff;--muted:#a8bfd9;--accent:#69a7ff;--accent2:#9bc6ff;--good:#65d2ae;--warn:#f1c16f;--danger:#ff8798;--shadow:0 10px 30px #0004}
+html,body{width:100%;min-height:100%;overflow-x:hidden}body{padding-left:max(16px,env(safe-area-inset-left));padding-right:max(16px,env(safe-area-inset-right));font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;letter-spacing:-.015em}main{width:100%;max-width:620px;margin-inline:auto;padding:18px 0 calc(112px + env(safe-area-inset-bottom))}.top{gap:12px;margin:4px 2px 20px;min-height:46px}.brand{font-size:13px;letter-spacing:-.035em;color:var(--accent);font-weight:950}.top-actions{flex-shrink:0}.icon-btn,.page-menu-toggle{width:42px;height:42px;border-radius:14px;border:1px solid var(--line);background:var(--surface);color:var(--accent);box-shadow:0 3px 10px rgba(23,73,130,.06)}
+.page{min-width:0}.page-title{font-size:27px;line-height:1.15;font-weight:850;letter-spacing:-.045em;color:var(--text)}.page-sub{font-size:13px;line-height:1.55;color:var(--muted);margin:7px 0 18px}.panel{min-width:0;margin:11px 0;padding:18px;border:1px solid var(--line);border-radius:20px;background:var(--surface);box-shadow:var(--shadow)}.eyebrow{font-size:10px;font-weight:850;letter-spacing:.12em;color:var(--muted)}.section-name{font-size:21px;font-weight:850;letter-spacing:-.035em}.clock{font-size:clamp(68px,19vw,102px);font-weight:800;letter-spacing:-.075em;color:var(--accent);line-height:1.08;margin:14px 0 10px}.total{font-size:13px}.total b{font-weight:850;color:var(--text)}.progress{height:7px;margin:22px 0 10px;background:var(--surface2)}.progress>div{background:linear-gradient(90deg,#0757c9,#58a4ff)}.meta{font-size:12px;font-weight:650}.controls{gap:12px;margin:26px 0 8px}.round{width:50px;height:50px;background:var(--surface2);border:1px solid var(--line);color:var(--accent);font-weight:900}.round.primary{width:62px;height:62px;background:var(--accent);border-color:var(--accent);color:white;box-shadow:0 8px 18px rgba(23,105,224,.25)}.btn{min-height:46px;padding:12px 15px;border-radius:14px;background:var(--surface2);border:1px solid var(--line);color:var(--text);font-size:14px;font-weight:800;white-space:normal;line-height:1.25}.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff;box-shadow:0 6px 15px rgba(23,105,224,.18)}.btn:focus-visible,.round:focus-visible,.icon-btn:focus-visible,.page-menu-toggle:focus-visible{outline:3px solid color-mix(in srgb,var(--accent) 35%,transparent);outline-offset:2px}.btn-row{display:flex;gap:9px;align-items:stretch}.btn-row>*{min-width:0;flex:1}.finish-action{color:var(--muted);background:transparent}.part{min-width:0;gap:12px;padding:13px 14px;background:var(--surface2);border:1px solid transparent;border-radius:14px;font-weight:700}.part>span{min-width:0;overflow-wrap:anywhere}.part small{font-size:12px;text-align:left;flex-shrink:0}.part.active{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 8%,var(--surface))}.history-item{width:100%;min-width:0;gap:12px;padding:15px;margin:9px 0;border-radius:17px;border:1px solid var(--line);background:var(--surface);box-shadow:0 3px 12px rgba(23,73,130,.035);text-align:right}.history-item>span:first-child{min-width:0;flex:1}.history-item strong{font-size:15px;font-weight:850;overflow-wrap:anywhere}.history-item small{display:block;line-height:1.5;overflow-wrap:anywhere}.chevron{flex-shrink:0;color:var(--accent);font-size:24px}.performance-list{display:grid;gap:12px}.performance-card{min-width:0;padding:15px;border:1px solid var(--line);border-radius:17px;background:linear-gradient(145deg,var(--surface2),var(--surface));display:grid;gap:13px}.performance-card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;min-width:0}.performance-card-title{font-size:15px;font-weight:850;line-height:1.35;min-width:0;overflow-wrap:anywhere}.performance-card-date{flex:0 0 auto;white-space:nowrap;font-size:11px;font-weight:750;color:var(--muted);background:var(--surface);border:1px solid var(--line);border-radius:99px;padding:5px 9px;font-variant-numeric:tabular-nums}.performance-score-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.performance-score{min-width:0;padding:10px 11px;border-radius:12px;background:var(--surface);border:1px solid color-mix(in srgb,var(--line) 75%,transparent)}.performance-score.overall{background:color-mix(in srgb,var(--accent) 10%,var(--surface));border-color:color-mix(in srgb,var(--accent) 28%,var(--line))}.performance-score-label{display:block;font-size:10px;font-weight:750;color:var(--muted);margin-bottom:4px}.performance-score-value{display:block;font-size:21px;font-weight:900;line-height:1.1;color:var(--text);font-variant-numeric:tabular-nums}.performance-score.overall .performance-score-value{color:var(--accent);font-size:25px}.performance-score-foot{font-size:10px;color:var(--muted);margin-top:2px}.metric-grid{gap:10px}.metric{min-width:0;padding:15px;border:1px solid var(--line);border-radius:17px;background:var(--surface)}.metric strong{font-size:26px;font-weight:900;color:var(--accent)}.form-grid{gap:13px}.field{min-width:0}.field label{font-weight:750;color:var(--text);line-height:1.35}.field input,.field select,.field textarea,.field textarea{min-width:0;width:100%;max-width:100%;min-height:46px;border-radius:13px;background:var(--surface2);border:1px solid var(--line);color:var(--text);font-size:16px;font-weight:600;padding:12px}.field textarea{min-height:88px;line-height:1.5}.score-preview{border:1px solid var(--line);background:linear-gradient(145deg,var(--surface2),var(--surface));border-radius:18px}.score-number{font-size:54px;font-weight:900;color:var(--accent)}.score-breakdown{font-weight:650}.score-breakdown b{font-weight:900;color:var(--accent)}.detail-head{gap:12px;align-items:flex-start}.detail-head>div{min-width:0;flex:1}.detail-title{font-size:20px;font-weight:900;overflow-wrap:anywhere}.detail-actions{margin-top:14px}.danger-btn{color:var(--danger);border-color:color-mix(in srgb,var(--danger) 28%,var(--line));background:color-mix(in srgb,var(--danger) 6%,var(--surface))}.setting-row{gap:12px;flex-wrap:wrap;font-weight:850}.switch{flex-shrink:0}.switch button{font-weight:900}.switch button.selected{background:var(--accent)}.page-menu{width:min(260px,calc(100vw - 32px));border-radius:17px;box-shadow:0 18px 42px rgba(13,49,91,.18)}.page-menu button{font-weight:900}.bottom-nav{padding:8px 14px calc(9px + env(safe-area-inset-bottom));background:color-mix(in srgb,var(--bg) 92%,transparent);border-top:1px solid var(--line);box-shadow:0 -5px 20px rgba(23,73,130,.06)}.nav-inner{max-width:620px;gap:6px}.nav-btn{min-width:0;padding:8px 3px 6px;border-radius:13px;font-size:11px;font-weight:900}.nav-btn.active{color:var(--accent);background:var(--surface);box-shadow:0 2px 8px rgba(23,73,130,.07)}.notice,.muted-note{line-height:1.6}.empty{padding:20px 4px;line-height:1.6}.pill{background:var(--surface2)}
+.score-record{margin-top:18px;padding-top:16px;border-top:1px solid var(--line)}.score-record h2{font-size:16px;font-weight:900;color:var(--accent);margin-bottom:10px}.score-record .part{margin:7px 0}.score-record .part strong{color:var(--accent);font-size:19px;font-weight:950}
+@media(max-width:480px){main{padding-top:13px}.panel{padding:17px;border-radius:19px}.page-title{font-size:25px}.form-grid{grid-template-columns:1fr}.wide{grid-column:auto}.detail-head{align-items:flex-start}.detail-head>.btn{flex-shrink:0}.btn-row{gap:7px}.btn-row .btn{padding:11px 9px;font-size:13px}.history-item{padding:13px}.part{font-size:12px}}
+@media(max-width:350px){body{padding-left:11px;padding-right:11px}.brand{font-size:11px}.controls{gap:8px}.round{width:46px;height:46px}.round.primary{width:56px;height:56px}.panel{padding:14px}.btn-row{flex-direction:column}.detail-actions{flex-direction:row}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+
+/* MOBILE-FIRST RESPONSIVE PASS · all screens */
+:root{--tap:44px}
+html{ -webkit-text-size-adjust:100%; text-size-adjust:100%; }
+body{min-width:320px;overflow-x:hidden;overscroll-behavior-x:none}
+main{min-width:0}
+button,input,select,textarea{font:inherit}
+button{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+.page,.panel,.detail-head,.form-grid,.field,.performance-card,.mark-group{min-width:0;max-width:100%}
+img,svg,canvas,video{max-width:100%}
+.field input,.field select,.field textarea,textarea{min-width:0;max-width:100%}
+.performance-card-head{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:start;gap:8px}
+.performance-card-title{min-width:0;overflow-wrap:anywhere;word-break:normal}
+.performance-card-date{justify-self:end;max-width:100%;white-space:nowrap;direction:ltr;font-variant-numeric:tabular-nums}
+.performance-score-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.history-item{display:flex;min-width:0}
+.history-item>span:first-child{overflow-wrap:anywhere;word-break:normal}
+.detail-head h2{min-width:0}
+.mark-time{overflow-wrap:anywhere}
+.mark-note{min-width:0;max-width:100%;font-size:16px}
+#exportText{min-height:42vh;min-width:0;max-width:100%;font-size:14px}
+@media(max-width:600px){
+ body{padding-left:max(14px,env(safe-area-inset-left));padding-right:max(14px,env(safe-area-inset-right));padding-bottom:calc(24px + env(safe-area-inset-bottom))}
+ main{max-width:100%;padding-top:12px;padding-bottom:calc(36px + env(safe-area-inset-bottom))}
+ .top{gap:10px;margin:3px 1px 18px;min-height:44px}
+ .brand{font-size:clamp(11px,3.2vw,13px);letter-spacing:-.04em;white-space:nowrap}
+ .top-actions{gap:7px}
+ .icon-btn,.page-menu-toggle{width:44px;height:44px;flex:0 0 44px}
+ .page-menu{left:0;right:auto;max-height:min(70vh,440px);overflow:auto}
+ .page-title{font-size:clamp(23px,6.4vw,27px);line-height:1.2}
+ .page-sub{font-size:13px;margin-bottom:15px}
+ .panel{padding:clamp(14px,4vw,18px);margin:10px 0;border-radius:18px}
+ .clock{font-size:clamp(66px,20vw,90px);letter-spacing:-.07em}
+ .controls{gap:clamp(10px,4vw,16px);margin:24px 0 8px}
+ .round{width:50px;height:50px;flex:0 0 50px}
+ .round.primary{width:60px;height:60px;flex-basis:60px}
+ .btn{min-height:46px;padding:12px 13px;font-size:14px;overflow-wrap:anywhere}
+ .btn-row{gap:8px}
+ .btn-row>*{min-width:0}
+ .form-grid{grid-template-columns:minmax(0,1fr);gap:12px}
+ .wide{grid-column:auto}
+ .field label{font-size:13px}
+ .field input,.field select,.field textarea{font-size:16px;min-height:48px}
+ .field textarea{min-height:92px}
+ .metric-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+ .metric{padding:12px;border-radius:14px}
+ .metric strong{font-size:23px}
+ .performance-list{gap:10px}
+ .performance-card{padding:13px;border-radius:15px;gap:11px}
+ .performance-card-head{grid-template-columns:minmax(0,1fr) auto;gap:7px}
+ .performance-card-title{font-size:14px;line-height:1.4}
+ .performance-card-date{font-size:10px;padding:5px 7px}
+ .performance-score-grid{gap:7px}
+ .performance-score{padding:9px;border-radius:11px}
+ .performance-score-label{font-size:10px;line-height:1.35}
+ .performance-score-value{font-size:20px}
+ .performance-score.overall .performance-score-value{font-size:23px}
+ .history-item{padding:13px;gap:9px}
+ .history-item strong{font-size:14px;line-height:1.35}
+ .history-item small{font-size:11px;line-height:1.55}
+ .detail-head{gap:8px}
+ .detail-title{font-size:18px}
+ .detail-actions{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+ .detail-actions .btn{min-width:0;padding:11px 8px;font-size:12px}
+ .part{gap:8px;padding:12px;font-size:13px}
+ .part small{font-size:11px}
+ .mark-groups{gap:10px}
+ .mark-group{padding:11px;border-radius:14px}
+ .mark-group-head{font-size:13px}
+ .mark-entry{padding:10px 0}
+ .mark-time{font-size:12px;line-height:1.7}
+ .mark-note{min-height:58px;padding:11px}
+ .setting-row{align-items:flex-start}
+ .switch button{min-height:40px}
+ .page-menu button{min-height:46px}
+}
+@media(max-width:390px){
+ body{padding-left:12px;padding-right:12px}
+ .top{margin-bottom:15px}
+ .brand{font-size:11px}
+ .panel{padding:13px;border-radius:16px}
+ .page-title{font-size:23px}
+ .performance-card-head{grid-template-columns:minmax(0,1fr)}
+ .performance-card-date{justify-self:start}
+ .performance-score-grid{gap:6px}
+ .performance-score{padding:8px}
+ .performance-score-label{font-size:9px}
+ .performance-score-value{font-size:19px}
+ .detail-actions{grid-template-columns:1fr}
+ .btn-row:not(.detail-actions){display:grid;grid-template-columns:1fr}
+ .meta{font-size:11px;gap:8px}
+ .mark-group-head{align-items:flex-start}
+}
+@media(max-width:350px){
+ body{padding-left:10px;padding-right:10px}
+ .brand{font-size:10px}
+ .icon-btn,.page-menu-toggle{width:40px;height:40px;flex-basis:40px}
+ .top-actions{gap:5px}
+ .metric-grid{grid-template-columns:1fr}
+ .performance-score-grid{grid-template-columns:1fr 1fr}
+ .controls{gap:8px}
+ .round{width:46px;height:46px;flex-basis:46px}
+ .round.primary{width:56px;height:56px;flex-basis:56px}
+}
+@media(orientation:landscape) and (max-height:500px){
+ main{padding-top:8px;padding-bottom:20px}
+ .top{margin-bottom:10px}
+ .clock{font-size:clamp(48px,12vw,68px);margin:5px 0}
+ .controls{margin:12px 0 5px}
+ .panel{padding:12px}
+}
+@media(prefers-reduced-motion:reduce){.page.active{animation:none}}
+
+
+.chapter-inputs{display:grid;gap:9px;margin:12px 0}.chapter-row{display:grid;grid-template-columns:minmax(0,1fr) 92px 90px;gap:8px;align-items:center;padding:10px;background:var(--surface2);border:1px solid var(--line);border-radius:13px}.chapter-row strong{font-size:13px}.chapter-row select,.chapter-row input{width:100%;min-width:0;min-height:43px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--text);padding:8px;font:inherit;font-size:14px}.chapter-row label{font-size:10px;color:var(--muted);display:block;margin-bottom:4px}.chapter-row .pilot-choice{grid-column:1/-1;display:flex;align-items:center;gap:7px;font-size:12px;color:var(--text)}.chapter-row input[type=radio]{width:18px;min-height:18px;accent-color:var(--accent)}.section-entry-head{display:flex;flex-direction:column;gap:3px;margin-top:18px}.pilot-help{font-size:11px;color:var(--muted);line-height:1.5;margin:8px 0 14px}.goal-head{display:flex;align-items:center;justify-content:space-between;gap:10px}.goal-head h2{font-size:28px;margin:6px 0}.goal-track{height:10px;border-radius:99px;background:var(--surface2);overflow:hidden;margin:12px 0 7px}.goal-track span{display:block;height:100%;background:var(--accent);border-radius:99px}.analytics-chart{display:grid;gap:10px}.chart-row{display:grid;grid-template-columns:72px minmax(0,1fr) 42px;gap:8px;align-items:center;font-size:11px}.chart-track{height:11px;background:var(--surface2);border-radius:99px;overflow:hidden}.chart-fill{height:100%;background:var(--accent);border-radius:99px}.chart-fill.verbal{background:#438ce8}.chart-fill.quant{background:#159b80}.chart-fill.pilot{background:#b87518}.chart-label{color:var(--muted)}.distribution-note{font-size:11px;color:var(--muted);margin:8px 0}.goal-form{display:grid;gap:10px}.goal-form input{width:100%;min-height:48px;padding:10px;border:1px solid var(--line);border-radius:11px;background:var(--surface2);color:var(--text);font:inherit;font-size:16px}
+@media(max-width:390px){.chapter-row{grid-template-columns:minmax(0,1fr) 82px 76px;gap:6px;padding:8px}.chapter-row strong{font-size:12px}.chapter-row select,.chapter-row input{font-size:13px;padding:6px}.goal-head{align-items:flex-start}}
+
+</style></head><body><main>
+<header class="top"><div class="brand">ready,set, Marathon!</div><div class="top-actions"><button class="icon-btn" id="settingsShortcut" aria-label="הגדרות">⚙</button><button class="page-menu-toggle" id="pageMenuToggle" aria-label="מעבר בין עמודים" aria-expanded="false">☰</button></div><div class="page-menu" id="pageMenu" hidden><button data-page="clockPage"><span class="menu-icon">◷</span>שעון</button><button data-page="pointsPage"><span class="menu-icon">☷</span>נקודות זמן</button><button data-page="historyPage"><span class="menu-icon">▱</span>היסטוריה</button><button data-page="manualPage"><span class="menu-icon">＋</span>הוספת סימולציה</button><button data-page="performancePage"><span class="menu-icon">↗</span>ביצועים</button></div></header>
+<section class="page active" id="clockPage"><div class="panel center"><div class="eyebrow" id="status">מוכן לסימולציה</div><div class="section-name" id="sectionName">חיבור</div><div class="clock" id="clock">00:00</div><div class="total">זמן כולל · <b id="total">00:00</b></div><div class="progress"><div id="bar"></div></div><div class="meta"><span id="partCount">חלק 1 מתוך 8</span><span id="remaining">נותרו 30:00</span></div><div class="controls"><button class="round" id="next" aria-label="לחלק הבא">↠</button><button class="round primary" id="startPause" aria-label="התחלה או השהיה">▶</button><button class="round" id="mark" aria-label="סימון זמן">⚑</button></div><button class="btn full finish-action" id="finish">סיום ושמירת סימולציה</button></div></div><div class="panel"><div class="eyebrow">מבנה הסימולציה</div><div class="section-list" id="schedule"></div><div class="btn-row"><button class="btn full" id="soundTest">בדיקת צליל</button></div><div class="notice">התראה תישמע 5 דקות לפני סוף כל חלק ובסיומו.</div></div></section>
+<section class="page" id="pointsPage"><div class="page-title">נקודות זמן</div><div class="page-sub" id="pointsSubtitle">תיעוד הסימולציה הפעילה</div><div class="panel"><div class="detail-head"><h2 id="pointsSource">סימולציה נוכחית</h2><span class="eyebrow" id="pointsCount">0 סימונים</span></div><div id="pointsList" class="empty">עדיין לא סומנו נקודות זמן.</div><button class="btn full" id="exportPoints">ייצוא נקודות זמן</button></div></section>
+<section class="page" id="historyPage"><div class="detail-head"><div><div class="page-title">היסטוריה</div><div class="page-sub">הסימולציות ששמרת במכשיר</div></div><button class="btn" id="new">＋ חדשה</button></div><div id="historyList"></div></section>
+<section class="page" id="detailPage"><button class="btn" id="backHistory">‹ חזרה להיסטוריה</button><div class="panel"><div class="detail-head"><div><div class="eyebrow">פירוט סימולציה</div><div class="detail-title" id="detailTitle"></div><div class="page-sub" id="detailMeta" style="margin:7px 0 0"></div></div><button class="btn" id="rename">✎ שם</button></div><div class="btn-row detail-actions"><button class="btn primary" id="editRecord">עריכת נתונים</button><button class="btn danger-btn" id="deleteRecord">מחיקת סימולציה</button></div></div><div class="panel"><h2>זמני חלקים</h2><div id="detailParts"></div></div><div class="panel"><h2>נקודות זמן</h2><div id="detailMarks"></div><button class="btn full" id="exportDetail">ייצוא כטקסט</button></div></section>
+<section class="page" id="settingsPage"><div class="page-title">הגדרות</div><div class="page-sub">התאמה אישית של השעון</div><div class="panel"><div class="setting-row"><span>מראה</span><div class="switch"><button id="darkTheme">כהה</button><button id="lightTheme">בהירה</button></div></div><div class="setting-row"><span>צלילי התראה</span><button class="btn" id="soundTest2">בדיקה</button></div><div class="notice">הבחירה נשמרת במכשיר ותישאר גם בפתיחה הבאה.</div></div>
+<div class="panel"><h2>ייצוא נתונים</h2><p class="muted-note">CSV לגיליונות נתונים, HTML לדוח קריא, או PDF להדפסה ושיתוף.</p><div class="btn-row"><button class="btn" id="exportCsv">ייצוא CSV · Excel</button><button class="btn" id="exportHtml">דוח HTML</button><button class="btn" id="exportPdf">שמירה כ־PDF</button></div><div class="backup-status">הייצוא כולל היסטוריה, ציונים, זמני פרקים ונקודות זמן.</div></div><div class="panel"><h2>גיבוי ושחזור</h2><p class="muted-note">גיבוי מלא של הנתונים וההגדרות האישיות, כולל ציון היעד. הנתונים נשארים במכשירך בלבד.</p><div class="btn-row"><button class="btn primary" id="backupExport">ייצוא גיבוי מלא · JSON</button><button class="btn" id="backupImportBtn">שחזור מגיבוי</button><input id="backupFile" type="file" accept="application/json,.json" hidden></div><div class="backup-status" id="backupStatus">הגיבוי נשמר במכשירך בלבד.</div></div></section>
+
+<section class="page" id="manualPage">
+ <div class="page-title">הוספת / עריכת סימולציה</div><div class="page-sub">הזן ציונים לסימולציה קיימת או הוסף סימולציה ללא מדידת שעון</div>
+ <div class="panel"><form id="manualForm"><input type="hidden" id="editRecordId" value="">
+  <div class="form-grid">
+   <div class="field"><label>תאריך הסימולציה</label><input type="date" id="mDate" required></div>
+   <div class="field"><label>שם / מקור הסימולציה</label><input id="mName" placeholder="למשל סימולציה 6"></div>
+   <div class="field wide"><label>ציון חיבור מתוך 6 (אפשר להשאיר ריק)</label><input type="number" id="mEssay" min="1" max="6" step="1" inputmode="numeric" placeholder="טרם התקבל ציון"></div>
+  </div>
+  <div class="section-entry-head"><strong>פירוט הפרקים</strong><span class="muted-note">בחר סוג פרק והזן תשובות נכונות</span></div>
+  <div id="chapterInputs" class="chapter-inputs"></div>
+  <div class="pilot-help">סמן פרק אחד כפיילוט. הוא יישמר בתחקור ובהתפלגות, אך לא ייכלל בחישוב הציון.</div>
+  <div class="field wide"><label>הערות כלליות</label><textarea id="mNotes" placeholder="תובנות מהסימולציה, ניהול זמן, תחושות..."></textarea></div>
+  <div class="panel score-preview" id="manualScorePreview"><div class="eyebrow">אומדן ציון פסיכומטרי</div><div class="muted-note">הזן תשובות נכונות כדי לראות אומדן לפי טבלת ההמרה.</div></div>
+  <p class="muted-note">ציון החיבור מומר באומדן לינארי בלבד ומשוקלל ב־25% מהציון המילולי. ההמרה אינה רשמית ואינה נוסחת מאל״ו.</p>
+  <div class="btn-row"><button class="btn primary full" id="saveManualBtn" type="submit">שמירת סימולציה</button><button class="btn full hidden" id="cancelEdit" type="button">ביטול עריכה</button></div>
+ </form></div>
+</section>
+<section class="page" id="performancePage">
+ <div class="page-title">ביצועים</div><div class="page-sub">התמונה המצטברת של ההתקדמות שלך</div>
+ <div class="panel goal-panel"><div class="goal-head"><div><div class="eyebrow">היעד האישי שלך</div><h2 id="goalValue">לא הוגדר יעד</h2></div><button class="btn" id="editGoal">הגדרת יעד</button></div><div id="goalProgress" class="muted-note">בחר יעד כדי להשוות אליו את ההתקדמות שלך.</div></div>
+ <div class="metric-grid" id="performanceMetrics"></div>
+ <div class="panel"><h2>מגמת התקדמות</h2><div id="performanceTrend" class="analytics-chart"></div></div>
+ <div class="panel"><h2>התפלגות הצלחה לפי פרקים</h2><div class="muted-note">כל פרק אמת מוצג לפי סוגו. פרקי פיילוט מוצגים בנפרד ואינם נכנסים לציון.</div><div id="chapterDistribution"></div></div>
+ <div class="panel"><h2>התפלגות ציונים</h2><div id="scoreDistribution"></div></div>
+ <div class="panel"><h2>היסטוריית ציונים</h2><div id="performanceList"></div></div>
+ <div class="panel"><h2>מגמות לפי תחום</h2><div id="trendSummary" class="muted-note">הוסף סימולציות כדי להתחיל לזהות מגמות.</div></div>
+</section>
+<section class="page" id="exportPage"><button class="btn" id="closeExport">‹ חזרה</button><div class="panel"><h2>ייצוא טקסט</h2><textarea id="exportText" readonly></textarea><div class="btn-row"><button class="btn primary" id="copyText">העתקה</button><button class="btn" id="selectText">בחירת הכול</button></div><div class="notice" id="copyNotice"></div></div></section>
+</main>
+<script>
+(()=>{
+const parts=[["חיבור",30],["חלק 1",20],["הפסקה 1",5],["חלק 2",20],["חלק 3",20],["הפסקה 2",5],["חלק 4",20],["חלק 5",20]];
+const KEY="psy_clock_pwa_history_v1",SESSION_KEY="psy_clock_pwa_session_v2",THEME_KEY="psy_clock_theme_v2";
+let index=0,elapsed=0,running=false,startedAt=0,tickId=null,markers=[],history=loadHistory(),audioCtx=null,lastAlert=-1,detailRecord=null,exportReturn="clockPage",warningTimeout=null;
+const $=id=>document.getElementById(id),fmt=s=>{s=Math.max(0,Math.floor(s));return String(Math.floor(s/60)).padStart(2,"0")+":"+String(s%60).padStart(2,"0")};
+const nowElapsed=()=>elapsed+(running?(Date.now()-startedAt)/1000:0),totalElapsed=()=>parts.slice(0,index).reduce((a,p)=>a+p[1]*60,0)+nowElapsed();
+function loadHistory(){try{return JSON.parse(localStorage.getItem(KEY)||"[]")}catch(e){return []}}function persist(){try{localStorage.setItem(KEY,JSON.stringify(history));return true}catch(e){return false}}
+function saveSession(){try{localStorage.setItem(SESSION_KEY,JSON.stringify({index,elapsed:running?nowElapsed():elapsed,running,startedAt,markers,updatedAt:Date.now()}))}catch(e){}}
+function restoreSession(){try{const v=JSON.parse(localStorage.getItem(SESSION_KEY)||"null");if(!v)return;index=Math.max(0,Math.min(parts.length-1,Number(v.index)||0));elapsed=Math.max(0,Number(v.elapsed)||0);markers=Array.isArray(v.markers)?v.markers:[];running=!!v.running;startedAt=Number(v.startedAt)||Date.now();if(running){tickId=setInterval(tick,250);scheduleWarning();setTimeout(tick,0)}}catch(e){}}
+function unlockAudio(){const AC=window.AudioContext||window.webkitAudioContext;if(!AC)return null;if(!audioCtx)audioCtx=new AC();if(audioCtx.state==="suspended")audioCtx.resume();return audioCtx}function tone(freq,duration,delay=0){const c=unlockAudio();if(!c)return;const o=c.createOscillator(),g=c.createGain();o.type="triangle";o.frequency.value=freq;g.gain.setValueAtTime(.0001,c.currentTime+delay);g.gain.exponentialRampToValueAtTime(.7,c.currentTime+delay+.02);g.gain.setValueAtTime(.7,c.currentTime+delay+Math.max(.04,duration-.06));g.gain.exponentialRampToValueAtTime(.0001,c.currentTime+delay+duration);o.connect(g);g.connect(c.destination);o.start(c.currentTime+delay);o.stop(c.currentTime+delay+duration+.04)}function alertSound(kind){
+ if(kind==="warning"){
+  // Short, light double-chime: a quick reminder five minutes before the section ends.
+  tone(880,.13,0);
+  tone(1175,.16,.19);
+ }else{
+  // Longer, unmistakable three-note completion signal.
+  tone(660,.34,0);
+  tone(880,.38,.42);
+  tone(1175,.62,.90);
+ }
+}
+function startSound(){
+ const c=unlockAudio();if(!c)return;
+ // Original upbeat launch fanfare: bright rising major arpeggio with a soft low pulse.
+ const t=c.currentTime+0.035;
+ const notes=[{f:523.25,d:0},{f:659.25,d:.16},{f:783.99,d:.32},{f:1046.5,d:.52}];
+ notes.forEach((n,i)=>{
+  const o=c.createOscillator(),g=c.createGain(),filter=c.createBiquadFilter();
+  o.type='triangle';o.frequency.setValueAtTime(n.f,t+n.d);
+  filter.type='lowpass';filter.frequency.value=2600;
+  g.gain.setValueAtTime(.0001,t+n.d);g.gain.exponentialRampToValueAtTime(i===3?.20:.14,t+n.d+.025);g.gain.exponentialRampToValueAtTime(.0001,t+n.d+.34);
+  o.connect(filter);filter.connect(g);g.connect(c.destination);o.start(t+n.d);o.stop(t+n.d+.37);
+ });
+ const bass=c.createOscillator(),bg=c.createGain();bass.type='sine';bass.frequency.setValueAtTime(130.81,t);
+ bg.gain.setValueAtTime(.0001,t);bg.gain.exponentialRampToValueAtTime(.10,t+.025);bg.gain.exponentialRampToValueAtTime(.0001,t+.48);
+ bass.connect(bg);bg.connect(c.destination);bass.start(t);bass.stop(t+.5);
+}
+function showPage(id){document.querySelectorAll(".page").forEach(p=>p.classList.toggle("active",p.id===id));$("detailPage").classList.toggle("active",id==="detailPage");$("exportPage").classList.toggle("active",id==="exportPage");document.querySelectorAll(".page-menu button").forEach(b=>b.classList.toggle("active",b.dataset.page===id||(id==="detailPage"&&b.dataset.page==="historyPage")));$("pageMenu").hidden=true;$("pageMenuToggle").setAttribute("aria-expanded","false");}
+function renderSchedule(){$("schedule").innerHTML=parts.map((p,i)=>`<div class="part ${i===index?"active":""} ${i<index?"done":""}"><span>${p[0]}</span><small>${p[1]} דק׳ ${i<index?"✓":""}</small></div>`).join("")}
+function renderClock(){let t=nowElapsed(),dur=parts[index][1]*60;$('sectionName').textContent=parts[index][0];$('clock').textContent=fmt(t);$('total').textContent=fmt(totalElapsed());$('partCount').textContent=`חלק ${index+1} מתוך ${parts.length}`;$('remaining').textContent="נותרו "+fmt(dur-t);$('bar').style.width=Math.min(100,t/dur*100)+"%";$('status').textContent=running?"הסימולציה רצה":(index===0&&elapsed===0?"מוכן לסימולציה":"מושהה");$('startPause').textContent=running?"Ⅱ":(totalElapsed()>0?"▶":"▶");$('next').disabled=index===parts.length-1;renderSchedule()}
+function renderPoints(){const source=markers.length||totalElapsed()>0?markers:(history.length?history[history.length-1].markers:[]);const isCurrent=markers.length||totalElapsed()>0;$('pointsSource').textContent=isCurrent?"סימולציה נוכחית":"סימולציה אחרונה";$('pointsSubtitle').textContent=isCurrent?"תיעוד הסימולציה הפעילה":"הנקודות מהסימולציה האחרונה שנשמרה";$('pointsCount').textContent=source.length+" סימונים";$('pointsList').innerHTML=source.length?source.map((m,i)=>`<div class="mark"><b>${i+1}.</b> ${m.part} · זמן בחלק ${fmt(m.section)} · זמן כולל ${fmt(m.total)} <span class="muted">(${m.wall})</span></div>`).join(""):'<div class="empty">עדיין לא סומנו נקודות זמן.</div>';$('exportPoints').disabled=!source.length;$('exportPoints').onclick=()=>openExport(makeText({dateLabel:new Date().toLocaleString("he-IL"),complete:false,totalSeconds:Math.floor(totalElapsed()),markers:source}),"pointsPage")}
+function renderHistory(){$('historyList').innerHTML=history.length?history.slice().reverse().map(r=>{const sc=scoreForRecord(r),timed=r.kind!=="manual";const detail=timed?`${r.complete?"הושלמה":"חלקית"} · ${fmt(r.totalSeconds||0)} · ${(r.markers||[]).length} סימונים`:"הוזנה ידנית";const score=sc?` · מילולי ${sc.verbal} · כמותי ${sc.quant} · אומדן ${sc.overall??"—"}`:" · ציונים טרם הוזנו";return `<button class="history-item" data-record="${r.id}"><span><strong>${escapeHtml(r.name||r.dateLabel||"סימולציה")}</strong><small>${detail}${score}</small></span><span class="chevron">‹</span></button>`}).join(''):'<div class="empty">הסימולציות שתשמור יופיעו כאן.</div>'}
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function renderAll(){renderClock();renderPoints();renderHistory()}
+function clearWarning(){if(warningTimeout){clearTimeout(warningTimeout);warningTimeout=null}}
+function scheduleWarning(){clearWarning();if(!running)return;const remaining=parts[index][1]*60-nowElapsed(),delay=(remaining-300)*1000;if(delay>=0){warningTimeout=setTimeout(()=>{if(!running)return;const left=parts[index][1]*60-nowElapsed();if(left<=300.5&&left>0&&lastAlert<0){lastAlert=0;alertSound("warning")}else if(left>300.5){scheduleWarning()}},delay)}else if(remaining>0&&lastAlert<0){lastAlert=0;alertSound("warning")}}
+function start(){const fresh=!running&&index===0&&elapsed<0.5&&markers.length===0;unlockAudio();if(running)return;if(fresh)startSound();running=true;startedAt=Date.now();lastAlert=-1;tickId=setInterval(tick,250);scheduleWarning();saveSession();renderAll()}function pause(){if(!running)return;elapsed=nowElapsed();running=false;clearInterval(tickId);clearWarning();saveSession();renderAll()}
+function tick(){if(!running)return;let now=Date.now(),t=nowElapsed();while(running){const dur=parts[index][1]*60;if(lastAlert<0&&t>=dur-300&&t<dur){lastAlert=0;alertSound("warning")}if(t<dur)break;elapsed=dur;alertSound("end");if(index===parts.length-1){running=false;clearInterval(tickId);saveRecord(true);reset();return}const overflow=t-dur;index++;elapsed=0;startedAt=now-overflow*1000;lastAlert=-1;t=overflow;scheduleWarning()}saveSession();renderAll()}
+function addMark(){markers.push({part:parts[index][0],section:Math.floor(nowElapsed()),total:Math.floor(totalElapsed()),wall:new Date().toLocaleTimeString("he-IL",{hour:"2-digit",minute:"2-digit",second:"2-digit"})});saveSession();renderPoints()}
+function record(complete){return{id:String(Date.now())+Math.random().toString(16).slice(2,6),dateLabel:new Date().toLocaleString("he-IL"),dateISO:new Date().toISOString(),complete,index,elapsedSeconds:Math.floor(nowElapsed()),totalSeconds:Math.floor(totalElapsed()),markers:markers.slice(),partTimes:parts.map((p,i)=>({name:p[0],seconds:i<index?p[1]*60:(i===index?Math.floor(nowElapsed()):0)}))}}
+function saveRecord(complete=false){if(!markers.length&&totalElapsed()===0)return;const r=record(complete);history.push(r);persist();saveSession();renderHistory()}
+function reset(){clearWarning();if(running){elapsed=nowElapsed();running=false;clearInterval(tickId)}index=0;elapsed=0;markers=[];lastAlert=-1;saveSession();renderAll()}
+function finish(){pause();saveRecord(false);reset();alert("הסימולציה נשמרה בהיסטוריה.")}
+function next(){pause();if(index<parts.length-1){index++;elapsed=0;lastAlert=-1;saveSession();renderAll()}}
+function makeText(r){let out=["ready,set, Marathon! | דוח סימולציה",r.name||r.dateLabel,"סטטוס: "+(r.complete?"הושלמה":"חלקית"),"זמן כולל: "+fmt(r.totalSeconds),"","סימוני זמן:"];if(!r.markers.length)out.push("לא נרשמו סימונים.");r.markers.forEach((m,i)=>{out.push(`${i+1}. ${m.part} | זמן בחלק: ${fmt(m.section)} | זמן כולל: ${fmt(m.total)} | שעה: ${m.wall}`);if(m.note&&m.note.trim())out.push("   הערה: "+m.note.trim())});return out.join("\n")}
+function openExport(txt,from){exportReturn=from;$('exportText').value=txt;$('copyNotice').textContent="";showPage("exportPage")}
+function openDetail(id){detailRecord=history.find(r=>r.id===id);if(!detailRecord)return;const r=detailRecord,sc=scoreForRecord(r),timed=r.kind!=="manual";$('detailTitle').textContent=r.name||r.dateLabel||"סימולציה";$('detailMeta').textContent=timed?`${r.complete?"הושלמה":"חלקית"} · ${r.dateLabel} · ${fmt(r.totalSeconds||0)}`:`סימולציה שהוזנה ידנית · ${r.dateLabel}`;
+if(timed){$('detailParts').innerHTML=(r.partTimes||[]).map(p=>`<div class="part"><span>${escapeHtml(p.name)}</span><small>${fmt(p.seconds)}</small></div>`).join("");}else{$('detailParts').innerHTML='<div class="muted-note">סימולציה שהוזנה ידנית, ללא מדידות שעון.</div>';}
+const scoreHtml=sc?`<div class="part"><span>מילולי בפרקי הברירה</span><small>${sc.verbalMC??"—"}</small></div><div class="part"><span>חיבור</span><small>${sc.essay===null?"טרם הוזן":sc.essay+"/6 · אומדן " + sc.essayEstimate}</small></div><div class="part"><span>מילולי לאחר שקלול החיבור</span><strong>${sc.verbal??"—"}</strong></div><div class="part"><span>כמותי</span><small>ציון תחומי ${sc.quant}</small></div><div class="part"><span>אומדן פסיכומטרי · כולל שקלול חיבור משוער</span><strong>${sc.overall??"—"}</strong></div>`:'<div class="empty">הציונים עדיין לא הוזנו לסימולציה הזו.</div>';
+$('detailParts').insertAdjacentHTML('beforeend',`<div class="score-record"><h2>ציוני הסימולציה</h2>${scoreHtml}</div>`);$('detailMarks').innerHTML=timed?renderDetailMarks(r):'<div class="muted-note">סימולציה שהוזנה ידנית.</div>';$('exportDetail').onclick=()=>openExport(timed?makeText(r):JSON.stringify(r,null,2),"detailPage");showPage("detailPage")} 
+function renderDetailMarks(r){const marks=Array.isArray(r.markers)?r.markers:[];if(!marks.length)return '<div class="empty">אין סימונים בסימולציה הזו.</div>';const names=[...parts.map(p=>p[0]),...new Set(marks.map(m=>m.part).filter(n=>!parts.some(p=>p[0]===n)))];const groups=names.map((name,partIndex)=>({name,partIndex,items:marks.map((m,index)=>({...m,_index:index})).filter(m=>m.part===name)})).filter(g=>g.items.length);return `<div class="mark-groups">${groups.map(g=>`<section class="mark-group" data-tone="${g.partIndex%7}"><div class="mark-group-head"><span>${escapeHtml(g.name)}</span><small>${g.items.length} ${g.items.length===1?'חותמת זמן':'חותמות זמן'}</small></div>${g.items.map(m=>`<div class="mark-entry"><div class="mark-time"><span class="mark-index">${m._index+1}</span><b>זמן בפרק</b> ${fmt(m.section)} <span class="muted">· זמן כולל ${fmt(m.total)} · ${escapeHtml(m.wall||'')}</span></div><textarea class="mark-note" data-marker-note="${m._index}" aria-label="הערה לחותמת זמן ${m._index+1}" placeholder="הוספת הערה לחותמת הזמן...">${escapeHtml(m.note||'')}</textarea><div class="mark-note-state" data-note-state="${m._index}">${m.note?'נשמר אוטומטית':'ההערה נשמרת אוטומטית'}</div></div>`).join('')}</section>`).join('')}</div>`}
+$('detailMarks').addEventListener('input',e=>{const field=e.target.closest('[data-marker-note]');if(!field||!detailRecord)return;const i=Number(field.dataset.markerNote);if(!Number.isInteger(i)||!detailRecord.markers||!detailRecord.markers[i])return;detailRecord.markers[i].note=field.value;const at=history.findIndex(x=>x.id===detailRecord.id);if(at>=0){history[at].markers=detailRecord.markers;persist()}const state=$('detailMarks').querySelector(`[data-note-state="${i}"]`);if(state)state.textContent=field.value.trim()?'נשמר אוטומטית':'ההערה נשמרת אוטומטית'});
+
+// 5.1 persistent data layer: IndexedDB is primary durable store; legacy localStorage remains a compatibility mirror.
+const DB_NAME="psychometric_clock_db",DB_VERSION=1,STORE="app";
+function openDB(){return new Promise((resolve,reject)=>{const req=indexedDB.open(DB_NAME,DB_VERSION);req.onupgradeneeded=()=>{if(!req.result.objectStoreNames.contains(STORE))req.result.createObjectStore(STORE)};req.onsuccess=()=>resolve(req.result);req.onerror=()=>reject(req.error)})}
+async function dbSet(key,value){try{const db=await openDB();await new Promise((res,rej)=>{const tx=db.transaction(STORE,"readwrite");tx.objectStore(STORE).put(value,key);tx.oncomplete=res;tx.onerror=()=>rej(tx.error)});db.close();return true}catch(e){console.warn("IndexedDB write failed",e);return false}}
+async function dbGet(key){try{const db=await openDB();const value=await new Promise((res,rej)=>{const tx=db.transaction(STORE,"readonly");const q=tx.objectStore(STORE).get(key);q.onsuccess=()=>res(q.result);q.onerror=()=>rej(q.error)});db.close();return value}catch(e){return undefined}}
+async function hydratePersistent(){const saved=await dbGet("history");if(Array.isArray(saved)&&saved.length){history=saved;try{localStorage.setItem(KEY,JSON.stringify(history))}catch(e){}}else if(history.length){dbSet("history",history)}const session=await dbGet("session");if(session&&!localStorage.getItem(SESSION_KEY)){try{localStorage.setItem(SESSION_KEY,JSON.stringify(session))}catch(e){}}}
+const legacyPersist=persist;persist=function(){let ok=legacyPersist();dbSet("history",history);return ok};
+const legacySaveSession=saveSession;saveSession=function(){legacySaveSession();try{const v=JSON.parse(localStorage.getItem(SESSION_KEY)||"null");if(v)dbSet("session",v)}catch(e){}};
+const VERBAL_MAP=[50,51,52,53,54,55,56,57,59,61,63,65,67,69,71,73,76,78,81,83,86,89,92,94,97,100,103,106,108,111,114,117,119,122,124,127,130,132,135,137,140,142,144,145,147,148,150];
+const QUANT_MAP=[50,52,54,56,58,60,63,65,68,70,73,76,79,81,84,87,90,93,95,98,101,104,107,110,113,116,119,122,124,127,130,132,135,137,140,142,144,145,147,148,150];
+function convertDomain(correct,domain){if(!Number.isInteger(Number(correct)))return null;const n=Number(correct),map=domain==="verbal"?VERBAL_MAP:QUANT_MAP;return n>=0&&n<map.length?map[n]:null}
+const OVERALL_BANDS=[
+ [50,50,200,200],[50.5,55,201,233],[55.5,60,234,267],[60.5,65,268,300],[65.5,70,301,334],[70.5,75,335,367],[75.5,80,368,395],[80.5,85,396,421],[85.5,90,422,448],[90.5,95,449,474],[95.5,100,475,501],[100.5,105,502,527],[105.5,110,528,554],[110.5,115,555,580],[115.5,120,581,607],[120.5,125,608,634],[125.5,130,635,660],[130.5,135,661,687],[135.5,140,688,713],[140.5,145,714,751],[145.5,149.5,752,795],[150,150,800,800]
+];
+function convertOverall(weighted){if(weighted==null||!Number.isFinite(weighted))return null;const x=Math.max(50,Math.min(150,weighted));for(const [lo,hi,outLo,outHi] of OVERALL_BANDS){if(x>=lo&&x<=hi){if(lo===hi)return outLo;return Math.round(outLo+(x-lo)/(hi-lo)*(outHi-outLo));}}return null}
+// Essay estimate: linear experimental mapping from the 1–6 rubric to the 50–150 domain scale.
+// This is an approximation, not an official MALU conversion table.
+const ESSAY_ESTIMATE_MAP={1:50,2:70,3:90,4:110,5:130,6:150};
+function estimateEssayScore(raw){const n=Number(raw);return Number.isInteger(n)&&ESSAY_ESTIMATE_MAP[n]!==undefined?ESSAY_ESTIMATE_MAP[n]:null}
+function scoreForRecord(r){const a=recordScores(r);if(!a.valid)return null;const verbalMC=a.verbalScore??convertDomain(a.verbal,"verbal"),quant=a.quantScore??convertDomain(a.quant,"quant"),essay=a.essay===null||a.essay===undefined||a.essay===""?null:Number(a.essay),essayEstimate=essay===null?null:estimateEssayScore(essay),verbalWeighted=verbalMC!==null&&essayEstimate!==null?Math.round(verbalMC*.75+essayEstimate*.25):verbalMC,weighted=verbalWeighted!==null&&quant!==null?(verbalWeighted+quant)/2:null;return {verbal:verbalWeighted,verbalMC,verbalWeighted,quant,essay,essayEstimate,weighted,overall:convertOverall(weighted),rawVerbal:a.verbal,rawQuant:a.quant}}
+const GOAL_KEY="ready_set_marathon_goal_v1";
+function loadGoal(){try{return JSON.parse(localStorage.getItem(GOAL_KEY)||"null")}catch(e){return null}}
+function saveGoal(){
+ const current=loadGoal();
+ const raw=prompt("מהו ציון הפסיכומטרי שאליו תרצה להגיע? (200–800)",current?.score||"");
+ if(raw===null)return;
+ const score=Number(raw);
+ if(!Number.isInteger(score)||score<200||score>800){alert("יש להזין ציון שלם בין 200 ל־800.");return;}
+ const verbalRaw=prompt("יעד מילולי (אופציונלי, אפשר להשאיר ריק)",current?.verbal||"");if(verbalRaw===null)return;
+ const quantRaw=prompt("יעד כמותי (אופציונלי, אפשר להשאיר ריק)",current?.quant||"");if(quantRaw===null)return;
+ const date=prompt("תאריך הבחינה (אופציונלי, בפורמט YYYY-MM-DD)",current?.date||"");if(date===null)return;
+ const goal={score,verbal:verbalRaw.trim()?Number(verbalRaw):null,quant:quantRaw.trim()?Number(quantRaw):null,date:date.trim()};
+ try{localStorage.setItem(GOAL_KEY,JSON.stringify(goal));}catch(e){alert("לא ניתן לשמור את היעד במכשיר.");return;}
+ renderPerformance();
+}
+function defaultChapters(){return [
+ {name:"פרק 1",type:"verbal",correct:"",pilot:false},
+ {name:"פרק 2",type:"quant",correct:"",pilot:false},
+ {name:"פרק 3",type:"verbal",correct:"",pilot:false},
+ {name:"פרק 4",type:"quant",correct:"",pilot:false},
+ {name:"פרק 5",type:"verbal",correct:"",pilot:true}
+]}
+function renderChapterInputs(existing){
+ const host=$("chapterInputs");if(!host)return;
+ const chapters=(Array.isArray(existing)&&existing.length===5?existing:defaultChapters());
+ host.innerHTML=chapters.map((c,i)=>`<div class="chapter-row" data-chapter="${i}">
+ <div><strong>פרק ${i+1}</strong><label>סוג הפרק</label><select data-type="${i}"><option value="verbal" ${c.type==="verbal"?"selected":""}>מילולי</option><option value="quant" ${c.type==="quant"?"selected":""}>כמותי</option></select></div>
+ <div><label>תשובות נכונות</label><input data-correct="${i}" type="number" min="0" max="${c.type==="quant"?20:23}" value="${c.correct??""}" inputmode="numeric" placeholder="0"></div>
+ <label class="pilot-choice"><input type="radio" name="pilotChapter" value="${i}" ${c.pilot?"checked":""}> פרק פיילוט</label>
+ </div>`).join("");
+ host.querySelectorAll("select[data-type]").forEach(el=>el.addEventListener("change",()=>{const i=Number(el.dataset.type),input=host.querySelector(`[data-correct="${i}"]`);input.max=el.value==="quant"?20:23;renderManualPreview()}));
+ host.querySelectorAll("input[data-correct],input[name=pilotChapter]").forEach(el=>el.addEventListener("input",renderManualPreview));
+ host.querySelectorAll("input[name=pilotChapter]").forEach(el=>el.addEventListener("change",renderManualPreview));
+}
+function readChapters(){const host=$("chapterInputs");if(!host)return defaultChapters();const pilot=host.querySelector('input[name="pilotChapter"]:checked');return Array.from({length:5},(_,i)=>({name:`פרק ${i+1}`,type:host.querySelector(`[data-type="${i}"]`)?.value||"verbal",correct:host.querySelector(`[data-correct="${i}"]`)?.value??"",pilot:!!pilot&&Number(pilot.value)===i}));}
+function aggregateChapters(chapters){const real=chapters.filter(c=>!c.pilot);const v=real.filter(c=>c.type==="verbal"),q=real.filter(c=>c.type==="quant");const sum=a=>a.reduce((n,c)=>n+(c.correct===""?0:Number(c.correct)),0);const complete=v.length===2&&q.length===2&&v.every(c=>c.correct!=="")&&q.every(c=>c.correct!=="");return {valid:complete,verbal:sum(v),quant:sum(q)};}
+function recordScores(r){if(Array.isArray(r?.chapters)&&r.chapters.length){const a=aggregateChapters(r.chapters);return {valid:a.valid,verbal:a.verbal,quant:a.quant,essay:r.essay,verbalScore:null,quantScore:null};}const valid=r&&r.verbal!==undefined&&r.quant!==undefined&&r.verbal!==""&&r.quant!=="";return {valid,verbal:Number(r?.verbal),quant:Number(r?.quant),essay:r?.essay,verbalScore:null,quantScore:null};}
+function renderManualPreview(){const box=$("manualScorePreview");if(!$('chapterInputs'))return;const chapters=readChapters(),a=aggregateChapters(chapters),essayRaw=$("mEssay")?.value??"",essayEstimate=essayRaw===""?null:estimateEssayScore(essayRaw);if(!a.valid){box.innerHTML='<div class="eyebrow">אומדן ציון פסיכומטרי</div><div class="muted-note">הזן את נתוני ארבעת פרקי האמת כדי לחשב אומדן.</div>';return;}const verbalMC=convertDomain(a.verbal,"verbal"),sq=convertDomain(a.quant,"quant"),sv=essayEstimate===null?verbalMC:Math.round(verbalMC*.75+essayEstimate*.25),overall=convertOverall((sv+sq)/2);box.innerHTML=`<div class="eyebrow">${essayEstimate===null?"אומדן ציון פסיכומטרי · ללא חיבור":"אומדן ציון פסיכומטרי · כולל שקלול חיבור משוער"}</div><div class="score-number">${overall??"—"}</div><div class="score-breakdown"><span>${essayEstimate===null?"מילולי ללא חיבור":"מילולי משוקלל"} <b>${sv}</b></span><span>כמותי <b>${sq}</b></span><span>חיבור ${essayEstimate===null?'<b>לא הוזן</b>':`<b>${essayEstimate}</b>`}</span></div><div class="muted-note">${essayEstimate===null?'הזן ציון חיבור 1–6 כדי לשקלל אותו.':'החיבור: 25% · פרקי מילולי: 75% · ההמרה משוערת בלבד.'}</div>`;}
+
+function renderPerformance(){
+ const rows=history.filter(r=>scoreForRecord(r)).slice().sort((a,b)=>(a.dateISO||"").localeCompare(b.dateISO||""));const scored=rows.map(r=>({r,s:scoreForRecord(r)}));const last=scored.at(-1),first=scored[0];
+ const change=last&&first?last.s.overall-first.s.overall:null;
+ $("performanceMetrics").innerHTML=`<div class="metric"><span class="muted-note">סימולציות עם ציונים</span><strong>${rows.length}</strong></div><div class="metric"><span class="muted-note">שינוי בציון הכללי</span><strong>${change===null?"—":(change>0?"+":"")+change}</strong></div>`;
+ const goal=loadGoal();$("goalValue").textContent=goal?goal.score:"לא הוגדר יעד";if(goal&&last){const pct=Math.max(0,Math.min(100,last.s.overall/goal.score*100)),gap=goal.score-last.s.overall;$("goalProgress").innerHTML=`ציון אחרון: <b>${last.s.overall}</b> · ${gap>0?`נותרו ${gap} נקודות ליעד`:`היעד הושג או נחצה ב־${Math.abs(gap)} נקודות`}<div class="goal-track"><span style="width:${pct}%"></span></div><div class="distribution-note">${pct.toFixed(1)}% מהיעד · ${goal.date?`תאריך בחינה: ${escapeHtml(goal.date)}`:""}${goal.verbal?` · יעד מילולי: ${goal.verbal}`:""}${goal.quant?` · יעד כמותי: ${goal.quant}`:""}</div>`}else $("goalProgress").textContent=goal?"הוסף סימולציה עם נתוני פרקים כדי לראות התקדמות ליעד.":"בחר יעד כדי להשוות אליו את ההתקדמות שלך.";
+ $("performanceList").classList.add("performance-list");$("performanceList").innerHTML=scored.length?scored.slice().reverse().map(({r,s})=>{const name=escapeHtml(r.name||r.dateLabel||"סימולציה"),date=escapeHtml(r.dateLabel||""),essay=s.essay===null?"טרם הוזן":s.essay+"/6";return `<article class="performance-card"><div class="performance-card-head"><div class="performance-card-title">${name}</div><span class="performance-card-date">${date}</span></div><div class="performance-score-grid"><div class="performance-score"><span class="performance-score-label">מילולי משוקלל</span><strong class="performance-score-value">${s.verbal??"—"}</strong></div><div class="performance-score"><span class="performance-score-label">ציון כמותי</span><strong class="performance-score-value">${s.quant??"—"}</strong></div><div class="performance-score overall"><span class="performance-score-label">אומדן ציון כללי</span><strong class="performance-score-value">${s.overall??"—"}</strong></div><div class="performance-score"><span class="performance-score-label">חיבור (1–6)</span><strong class="performance-score-value">${essay}</strong></div></div></article>`}).join(""):'<div class="empty">אין עדיין סימולציות עם נתוני פרקים.</div>';
+ const trend=$('performanceTrend');if(scored.length){const max=800;trend.innerHTML=scored.map(({r,s})=>`<div class="chart-row"><span class="chart-label">${escapeHtml(r.dateLabel||"סימולציה")}</span><div class="chart-track"><div class="chart-fill" style="width:${Math.max(0,Math.min(100,s.overall/max*100))}%"></div></div><b>${s.overall}</b></div>`).join("");}else trend.innerHTML='<div class="empty">הגרף יופיע לאחר הזנת סימולציות.</div>';
+ const allChapters=history.flatMap(r=>(r.chapters||[]).map(c=>({...c,source:r.name||r.dateLabel||"סימולציה"})));const realV=allChapters.filter(c=>!c.pilot&&c.type==="verbal"&&c.correct!=="");const realQ=allChapters.filter(c=>!c.pilot&&c.type==="quant"&&c.correct!=="");const pilots=allChapters.filter(c=>c.pilot&&c.correct!=="");const avg=a=>a.length?a.reduce((n,c)=>n+Number(c.correct)/(c.type==="quant"?20:23)*100,0)/a.length:0;
+ $('chapterDistribution').innerHTML=[['מילולי',realV,'verbal'],['כמותי',realQ,'quant'],['פיילוט',pilots,'pilot']].map(([label,a,cls])=>`<div class="chart-row"><span class="chart-label">${label} (${a.length})</span><div class="chart-track"><div class="chart-fill ${cls}" style="width:${avg(a)}%"></div></div><b>${a.length?avg(a).toFixed(0)+"%":"—"}</b></div>`).join('')+`<div class="distribution-note">ממוצע אחוזי הצלחה בפרקים שנשמרו. פיילוט מוצג בנפרד ואינו משוקלל.</div>`;
+ const buckets=[['200–399',200,399],['400–499',400,499],['500–599',500,599],['600–699',600,699],['700–800',700,800]];const maxBucket=Math.max(1,...buckets.map(b=>scored.filter(x=>x.s.overall>=b[1]&&x.s.overall<=b[2]).length));$('scoreDistribution').innerHTML=buckets.map(b=>{const n=scored.filter(x=>x.s.overall>=b[1]&&x.s.overall<=b[2]).length;return `<div class="chart-row"><span class="chart-label">${b[0]}</span><div class="chart-track"><div class="chart-fill" style="width:${n/maxBucket*100}%"></div></div><b>${n}</b></div>`}).join('');
+ if(scored.length>1){const v=scored.map(x=>x.s.verbal),q=scored.map(x=>x.s.quant);$('trendSummary').textContent=`מילולי: ${v[0]} ← ${v.at(-1)} (${v.at(-1)-v[0]>=0?"+":""}${v.at(-1)-v[0]}). כמותי: ${q[0]} ← ${q.at(-1)} (${q.at(-1)-q[0]>=0?"+":""}${q.at(-1)-q[0]}).`}else $('trendSummary').textContent="נדרשות לפחות שתי סימולציות כדי להציג מגמת שינוי.";
+}
+function downloadBlob(blob,name){const a=document.createElement("a"),url=URL.createObjectURL(blob);a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1500)}
+function exportRows(){return history.slice().sort((a,b)=>(a.dateISO||"").localeCompare(b.dateISO||"")).map(r=>{const sc=scoreForRecord(r)||{};const chapters=Array.isArray(r.chapters)?r.chapters:[];const real=chapters.filter(c=>!c.pilot);return {date:r.dateLabel||"",name:r.name||"סימולציה",kind:r.kind==="manual"?"ידנית":(r.complete?"הושלמה":"חלקית"),durationSeconds:r.totalSeconds||0,verbalRaw:sc.rawVerbal??r.verbal??"",quantRaw:sc.rawQuant??r.quant??"",verbalScore:sc.verbal??"",quantScore:sc.quant??"",essay:sc.essay??"",essayEstimate:sc.essayEstimate??"",overall:sc.overall??"",verbalChapters:real.filter(c=>c.type==="verbal").map(c=>c.correct).join(" / "),quantChapters:real.filter(c=>c.type==="quant").map(c=>c.correct).join(" / "),pilot:chapters.filter(c=>c.pilot).map(c=>`${c.type}:${c.correct??""}`).join("; "),timestamps:(r.markers||[]).length,notes:r.notes||""}})}
+function csvCell(v){return '"'+String(v??"").replace(/"/g,'""')+'"'}
+function exportCsv(){const rows=exportRows(),headers=["תאריך","שם סימולציה","סוג","משך בשניות","נכונות מילולי","נכונות כמותי","ציון מילולי","ציון כמותי","ציון חיבור 1–6","אומדן חיבור 50–150","ציון כללי","פרקי מילולי","פרקי כמותי","פיילוט","חותמות זמן","הערות"],keys=["date","name","kind","durationSeconds","verbalRaw","quantRaw","verbalScore","quantScore","essay","essayEstimate","overall","verbalChapters","quantChapters","pilot","timestamps","notes"];const csv="\ufeff"+[headers,...rows.map(r=>keys.map(k=>r[k]))].map(row=>row.map(csvCell).join(",")).join("\r\n");downloadBlob(new Blob([csv],{type:"text/csv;charset=utf-8"}),`ready-set-marathon-${new Date().toISOString().slice(0,10)}.csv`);$("backupStatus").textContent="קובץ CSV נוצר. אפשר לפתוח אותו ב־Excel או Google Sheets."}
+function reportHtml(){const rows=exportRows(),goal=loadGoal(),esc=v=>String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));return `<!doctype html><html lang="he" dir="rtl"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ready,set, Marathon! · דוח ביצועים</title><style>body{font-family:Arial,sans-serif;max-width:1100px;margin:36px auto;padding:0 20px;color:#17202b}h1{margin-bottom:4px}.sub{color:#667085;margin-bottom:24px}.cards{display:flex;gap:12px;flex-wrap:wrap;margin:20px 0}.card{border:1px solid #dce1e8;border-radius:12px;padding:14px;min-width:130px}.card b{display:block;font-size:24px;margin-top:5px}table{width:100%;border-collapse:collapse;font-size:13px}th,td{padding:10px;border-bottom:1px solid #e5e7eb;text-align:right}th{background:#f4f6f8}@media print{body{margin:0}.no-print{display:none}table{font-size:10px}}</style><h1>ready,set, Marathon!</h1><div class="sub">דוח ביצועים · נוצר ${esc(new Date().toLocaleString("he-IL"))}</div><div class="cards"><div class="card">מספר סימולציות<b>${rows.length}</b></div><div class="card">יעד אישי<b>${goal?.score??"לא הוגדר"}</b></div><div class="card">סימולציות עם ציון<b>${rows.filter(r=>r.overall!=="").length}</b></div></div><table><thead><tr><th>תאריך</th><th>סימולציה</th><th>מילולי</th><th>כמותי</th><th>חיבור</th><th>כללי</th><th>משך</th><th>סימונים</th></tr></thead><tbody>${rows.map(r=>`<tr><td>${esc(r.date)}</td><td>${esc(r.name)}</td><td>${esc(r.verbalScore)}</td><td>${esc(r.quantScore)}</td><td>${esc(r.essay)}</td><td>${esc(r.overall)}</td><td>${esc(Math.round(r.durationSeconds/60))} דק׳</td><td>${esc(r.timestamps)}</td></tr>`).join("")}</tbody></table><p class="sub">הציונים מוצגים כפי שחושבו באפליקציה. נתונים חסרים מסומנים כריקים.</p><button class="no-print" onclick="window.print()">הדפסה / שמירה כ־PDF</button></html>`}
+function exportHtml(){downloadBlob(new Blob([reportHtml()],{type:"text/html;charset=utf-8"}),`ready-set-marathon-report-${new Date().toISOString().slice(0,10)}.html`);$("backupStatus").textContent="דוח HTML נוצר וניתן לפתיחה בכל דפדפן."}
+function exportPdf(){const w=window.open("","_blank");if(!w){alert("הדפדפן חסם פתיחת חלון. אפשר לייצא דוח HTML ולבחור ממנו הדפסה / שמירה כ־PDF.");return}w.document.open();w.document.write(reportHtml());w.document.close();w.onload=()=>w.print()}
+async function exportBackup(){const payload={app:"ready,set, Marathon!",version:3,exportedAt:new Date().toISOString(),history,goal:loadGoal(),session:JSON.parse(localStorage.getItem(SESSION_KEY)||"null"),theme:localStorage.getItem(THEME_KEY)||"light"};downloadBlob(new Blob([JSON.stringify(payload,null,2)],{type:"application/json"}),`ready-set-marathon-backup-${new Date().toISOString().slice(0,10)}.json`);$("backupStatus").textContent="הגיבוי יוצא בהצלחה, כולל היעד האישי. שמור את הקובץ במקום בטוח."}
+async function importBackup(file){try{const data=JSON.parse(await file.text());if(!(data.app==="ready,set, Marathon!"||data.app==="Psychometric Clock")||!Array.isArray(data.history))throw new Error("קובץ גיבוי לא מזוהה");if(!confirm(`נמצאו ${data.history.length} סימולציות. השחזור יחליף את ההיסטוריה וההגדרות הנוכחיות. להמשיך?`))return;history=data.history;persist();if(data.goal)localStorage.setItem(GOAL_KEY,JSON.stringify(data.goal));else localStorage.removeItem(GOAL_KEY);if(data.session){localStorage.setItem(SESSION_KEY,JSON.stringify(data.session));dbSet("session",data.session)}if(data.theme)setTheme(data.theme);renderAll();renderPerformance();$("backupStatus").textContent="השחזור הושלם בהצלחה, כולל היעד האישי."}catch(e){alert("לא ניתן לשחזר את הקובץ: "+e.message)}}
+function saveManual(e){e.preventDefault();const date=$("mDate").value,chapters=readChapters(),essay=$("mEssay").value===""?null:Number($("mEssay").value);if(essay!==null&&(!Number.isInteger(essay)||essay<1||essay>6)){alert("ציון החיבור חייב להיות מספר שלם בין 1 ל־6.");return}if(!date){alert("יש לבחור תאריך לסימולציה.");return}if(chapters.some(c=>c.correct!==""&&(Number(c.correct)<0||Number(c.correct)>(c.type==="quant"?20:23)))){alert("בדוק את מספר התשובות הנכונות בכל פרק.");return}if(chapters.filter(c=>c.pilot).length!==1){alert("יש לבחור פרק פיילוט אחד.");return}const realTypes=chapters.filter(c=>!c.pilot).reduce((o,c)=>(o[c.type]=(o[c.type]||0)+1,o),{});if(realTypes.verbal!==2||realTypes.quant!==2){alert("בארבעת פרקי האמת יש לבחור שני פרקים מילוליים ושני פרקים כמותיים. את הפרק החמישי אפשר להגדיר כפיילוט מכל סוג.");return}const a=aggregateChapters(chapters);if(!a.valid){alert("כדי לחשב ציון צריך לפחות פרק אמת מילולי אחד ופרק אמת כמותי אחד.");return}const id=$("editRecordId").value,data={dateISO:new Date(date+"T12:00:00").toISOString(),dateLabel:new Date(date+"T12:00:00").toLocaleDateString("he-IL"),name:$("mName").value.trim(),chapters,verbal:a.verbal,quant:a.quant,essay,notes:$("mNotes").value.trim()};if(id){const at=history.findIndex(x=>x.id===id);if(at<0){alert("לא מצאתי את הסימולציה לעריכה.");return}history[at]={...history[at],...data};persist();alert("הנתונים עודכנו בהצלחה.")}else{history.push({id:"manual-"+Date.now()+"-"+Math.random().toString(16).slice(2,6),kind:"manual",...data,markers:[],partTimes:[],totalSeconds:0});persist();alert("הסימולציה נשמרה בהיסטוריה.")}resetManualForm();renderHistory();renderPerformance();showPage("historyPage")}
+function resetManualForm(){$("manualForm").reset();$("editRecordId").value="";$("mDate").value=new Date().toISOString().slice(0,10);$("saveManualBtn").textContent="שמירת סימולציה";$("cancelEdit").classList.add("hidden");$("manualPage").querySelector(".page-title").textContent="הוספת סימולציה";renderChapterInputs();renderManualPreview()}
+function editManualRecord(r){if(!r)return;$("editRecordId").value=r.id;$("mDate").value=(r.dateISO||new Date().toISOString()).slice(0,10);$("mName").value=r.name||"";$("mEssay").value=r.essay??"";$("mNotes").value=r.notes||"";renderChapterInputs(r.chapters||legacyChapters(r));$("saveManualBtn").textContent="שמירת שינויים";$("cancelEdit").classList.remove("hidden");$("manualPage").querySelector(".page-title").textContent="עריכת נתוני סימולציה";renderManualPreview();showPage("manualPage")}
+function legacyChapters(r){return [{name:"פרק 1",type:"verbal",correct:r.verbal??"",pilot:false},{name:"פרק 2",type:"quant",correct:r.quant??"",pilot:false},{name:"פרק 3",type:"verbal",correct:"",pilot:false},{name:"פרק 4",type:"quant",correct:"",pilot:false},{name:"פרק 5",type:"verbal",correct:"",pilot:true}]}
+function deleteCurrentRecord(){if(!detailRecord)return;if(!confirm("למחוק את הסימולציה הזו לצמיתות מהמכשיר?"))return;history=history.filter(r=>r.id!==detailRecord.id);detailRecord=null;persist();renderAll();renderPerformance();showPage("historyPage")}
+$("manualForm").addEventListener("submit",saveManual);$("mEssay").addEventListener("input",renderManualPreview);renderChapterInputs();$("editGoal").addEventListener("click",saveGoal);
+$("cancelEdit").onclick=resetManualForm;$("editRecord").onclick=()=>{if(detailRecord)editManualRecord(detailRecord)};$("deleteRecord").onclick=deleteCurrentRecord;
+$("backupExport").onclick=exportBackup;$("exportCsv").onclick=exportCsv;$("exportHtml").onclick=exportHtml;$("exportPdf").onclick=exportPdf;$("backupImportBtn").onclick=()=>$("backupFile").click();$("backupFile").addEventListener("change",e=>{if(e.target.files[0])importBackup(e.target.files[0]);e.target.value=""});
+document.querySelectorAll('.page-menu button').forEach(b=>b.addEventListener("click",()=>{if(b.dataset.page==="performancePage")renderPerformance()}));
+$("mDate").value=new Date().toISOString().slice(0,10);
+const originalShowPage=showPage;showPage=function(id){originalShowPage(id);if(id==="performancePage")renderPerformance()};
+
+function setTheme(theme){document.documentElement.dataset.theme=theme;localStorage.setItem(THEME_KEY,theme);$('darkTheme').classList.toggle('selected',theme==='dark');$('lightTheme').classList.toggle('selected',theme==='light');document.querySelector('meta[name="theme-color"]').content=theme==='dark'?'#0d1b2d':'#f4f8ff'}
+// navigation + controls
+document.querySelectorAll('.page-menu button').forEach(b=>b.onclick=()=>{if(b.dataset.page==="manualPage"&&!$("editRecordId").value)resetManualForm();showPage(b.dataset.page)});$('pageMenuToggle').onclick=()=>{const menu=$('pageMenu');menu.hidden=!menu.hidden;$('pageMenuToggle').setAttribute('aria-expanded',String(!menu.hidden))};document.addEventListener('click',e=>{if(!e.target.closest('.top')){$('pageMenu').hidden=true;$('pageMenuToggle').setAttribute('aria-expanded','false')}});$('settingsShortcut').onclick=()=>showPage('settingsPage');$('startPause').onclick=()=>running?pause():start();$('mark').onclick=addMark;$('next').onclick=next;$('finish').onclick=finish;$('soundTest').onclick=$('soundTest2').onclick=()=>{unlockAudio();alertSound('warning');setTimeout(()=>alertSound('end'),1000)};
+$('new').onclick=()=>{if(totalElapsed()>0||markers.length){if(confirm('לשמור את הסימולציה הנוכחית לפני פתיחת חדשה?'))saveRecord(false)}reset();showPage('clockPage')};$('historyList').onclick=e=>{const b=e.target.closest('[data-record]');if(b)openDetail(b.dataset.record)};$('backHistory').onclick=()=>showPage('historyPage');$('rename').onclick=()=>{const name=prompt('שם חדש לסימולציה:',detailRecord.name||detailRecord.dateLabel);if(name&&name.trim()){detailRecord.name=name.trim();const at=history.findIndex(r=>r.id===detailRecord.id);if(at>=0)history[at].name=detailRecord.name;persist();$('detailTitle').textContent=detailRecord.name;renderHistory()}};
+$('darkTheme').onclick=()=>setTheme('dark');$('lightTheme').onclick=()=>setTheme('light');$('closeExport').onclick=()=>showPage(exportReturn);$('copyText').onclick=async()=>{try{await navigator.clipboard.writeText($('exportText').value);$('copyNotice').textContent='הטקסט הועתק.'}catch(e){$('exportText').select();$('copyNotice').textContent='הטקסט מסומן. אפשר לבחור העתקה.'}};$('selectText').onclick=()=>{$('exportText').focus();$('exportText').select()};
+restoreSession();hydratePersistent().then(()=>{renderAll();renderPerformance()});setTheme(localStorage.getItem(THEME_KEY)||'light');renderAll();window.addEventListener('pagehide',()=>{if(running)elapsed=nowElapsed();saveSession();persist()});document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&running)tick();else saveSession()});if('serviceWorker'in navigator&&location.protocol!=='file:')window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
+})();
+</script></body></html>
