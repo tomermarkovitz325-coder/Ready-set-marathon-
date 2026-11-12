@@ -362,7 +362,11 @@ function saveGoal(){
  try{localStorage.setItem(GOAL_KEY,JSON.stringify(goal));dbSet("goal",goal);}catch(e){alert("לא ניתן לשמור את היעד במכשיר.");return;}
  renderPerformance();
 }
-const CATEGORY_NAMES={verbal:["אנלוגיות","השלמת משפטים מילולי","הבנה והסקה","הבנת הנקרא מילולי"],quant:["הסקה מתרשימים","בעיות","אלגברה","גיאומטריה"]};
+const CATEGORY_CONFIG={
+ verbal:[{name:"אנלוגיות",total:6},{name:"השלמת משפטים מילולי",total:3},{name:"הבנה והסקה",total:8},{name:"הבנת הנקרא מילולי",total:6}],
+ quant:[{name:"הסקה מתרשימים",total:4},{name:"בעיות",total:6},{name:"אלגברה",total:5},{name:"גיאומטריה",total:5}]
+};
+const CATEGORY_NAMES={verbal:CATEGORY_CONFIG.verbal.map(x=>x.name),quant:CATEGORY_CONFIG.quant.map(x=>x.name)};
 function defaultChapters(){return [
  {name:"פרק 1",type:"verbal",correct:"",pilot:false,categories:[]},
  {name:"פרק 2",type:"quant",correct:"",pilot:false,categories:[]},
@@ -379,9 +383,9 @@ function renderChapterInputs(existing){
    <div><strong>פרק ${i+1}</strong><label>שלב 1 · סוג הפרק</label><select data-type="${i}"><option value="verbal" ${c.type==="verbal"?"selected":""}>מילולי</option><option value="quant" ${c.type==="quant"?"selected":""}>כמותי</option></select></div>
    <div><label>תשובות נכונות בפרק</label><input data-correct="${i}" type="number" min="0" max="${c.type==="quant"?20:23}" value="${c.correct??""}" inputmode="numeric" placeholder="0"></div>
    <label class="pilot-choice"><input type="radio" name="pilotChapter" value="${i}" ${c.pilot?"checked":""}> פרק פיילוט</label>
-   <div class="chapter-categories"><div><strong>שלב 2 · תתי־נושאים של ${c.type==="verbal"?"מילולי":"כמותי"}</strong><div class="muted-note">שלב 3 · הזן תשובות נכונות וסך שאלות בכל תת־נושא. אפשר להשאיר ריק.</div></div>
-    <div class="category-input-head"><span>תת־נושא</span><span>נכון</span><span>סך הכול</span></div>
-    ${cats.map((name,j)=>{const oldCat=old.find(x=>x.name===name)||{};return `<div class="category-input-row"><span>${name}</span><input data-cat-correct="${i}" data-cat-index="${j}" type="number" min="0" max="23" inputmode="numeric" placeholder="—" value="${oldCat.correct??""}" aria-label="תשובות נכונות: ${name}"><input data-cat-total="${i}" data-cat-index="${j}" type="number" min="0" max="23" inputmode="numeric" placeholder="—" value="${oldCat.total??""}" aria-label="סך שאלות: ${name}"></div>`}).join("")}
+   <div class="chapter-categories"><div><strong>שלב 2 · תתי־נושאים של ${c.type==="verbal"?"מילולי":"כמותי"}</strong><div class="muted-note">שלב 3 · הזן רק את מספר התשובות הנכונות. מכסת השאלות בכל תת־נושא קבועה לפי מבנה הפרק.</div></div>
+    <div class="category-input-head"><span>תת־נושא</span><span>נכון</span><span>מקסימום</span></div>
+    ${cats.map((name,j)=>{const oldCat=old.find(x=>x.name===name)||{},limit=CATEGORY_CONFIG[c.type][j].total;return `<div class="category-input-row"><span>${name}</span><input data-cat-correct="${i}" data-cat-index="${j}" type="number" min="0" max="${limit}" step="1" inputmode="numeric" placeholder="0" value="${oldCat.correct??""}" aria-label="תשובות נכונות: ${name}"><input data-cat-total="${i}" data-cat-index="${j}" type="number" min="${limit}" max="${limit}" value="${limit}" readonly aria-label="מספר שאלות מקסימלי: ${name}" title="מכסה קבועה"></div>`}).join("")}
    </div>
   </div>`;
  }).join("");
@@ -390,7 +394,7 @@ function renderChapterInputs(existing){
   if(hasData&&!confirm("שינוי סוג הפרק יחליף את תתי־הנושאים המוצגים. להמשיך?")){el.value=el.dataset.previous|| (el.value==="verbal"?"quant":"verbal");return}
   input.max=el.value==="quant"?20:23;input.value="";const current=readChapters();current[i].type=el.value;current[i].correct="";current[i].categories=[];renderChapterInputs(current);renderManualPreview();
  }));
- host.querySelectorAll('input[data-correct],input[name="pilotChapter"],input[data-cat-correct],input[data-cat-total]').forEach(el=>el.addEventListener("input",renderManualPreview));
+ host.querySelectorAll('input[data-correct],input[name="pilotChapter"],input[data-cat-correct]').forEach(el=>el.addEventListener("input",()=>{if(el.matches('[data-cat-correct]')){const max=Number(el.max);if(el.value!==""&&Number(el.value)>max)el.value=String(max);if(el.value!==""&&Number(el.value)<0)el.value="0";}renderManualPreview()}));
  host.querySelectorAll('input[name="pilotChapter"]').forEach(el=>el.addEventListener("change",renderManualPreview));
  host.querySelectorAll("select[data-type]").forEach(el=>el.dataset.previous=el.value);
 }
