@@ -403,8 +403,8 @@ function saveGoal(){
  renderPerformance();
 }
 const CATEGORY_CONFIG={
- verbal:[{name:"אנלוגיות",total:6},{name:"השלמת משפטים מילולי",total:3},{name:"הבנה והסקה",total:8},{name:"הבנת הנקרא מילולי",total:6}],
- quant:[{name:"הסקה מתרשימים",total:4},{name:"בעיות",total:6},{name:"אלגברה",total:5},{name:"גיאומטריה",total:5}]
+ verbal:[{name:"אנלוגיות"},{name:"השלמת משפטים מילולי"},{name:"הבנה והסקה"},{name:"הבנת הנקרא מילולי"}],
+ quant:[{name:"הסקה מתרשימים"},{name:"בעיות"},{name:"אלגברה"},{name:"גיאומטריה"}]
 };
 const CATEGORY_NAMES={verbal:CATEGORY_CONFIG.verbal.map(x=>x.name),quant:CATEGORY_CONFIG.quant.map(x=>x.name)};
 function defaultChapters(){return [
@@ -425,7 +425,7 @@ function renderChapterInputs(existing){
    <label class="pilot-choice"><input type="radio" name="pilotChapter" value="${i}" ${c.pilot?"checked":""}> פרק פיילוט</label>
    <div class="chapter-categories"><div><strong>שלב 2 · תתי־נושאים של ${c.type==="verbal"?"מילולי":"כמותי"}</strong><div class="muted-note">הזן לכל תת־נושא את מספר התשובות הנכונות ואת מספר השאלות שהופיעו בפועל בסימולציה.</div></div>
     <div class="category-input-head"><span>תת־נושא</span><span>נכון</span><span>מתוך</span></div>
-    ${cats.map((name,j)=>{const oldCat=old.find(x=>x.name===name)||{},suggested=CATEGORY_CONFIG[c.type][j].total,limit=oldCat.total??suggested;return `<div class="category-input-row"><span>${name}</span><input data-cat-correct="${i}" data-cat-index="${j}" type="number" min="0" step="1" inputmode="numeric" placeholder="0" value="${oldCat.correct??""}" aria-label="תשובות נכונות: ${name}"><input data-cat-total="${i}" data-cat-index="${j}" type="number" min="1" step="1" inputmode="numeric" placeholder="${suggested}" value="${oldCat.total??""}" aria-label="סך השאלות: ${name}"></div>`}).join("")}
+    ${cats.map((name,j)=>{const oldCat=old.find(x=>x.name===name)||{};return `<div class="category-input-row"><span>${name}</span><input data-cat-correct="${i}" data-cat-index="${j}" type="number" min="0" step="1" inputmode="numeric" placeholder="נכון" value="${oldCat.correct??""}" aria-label="תשובות נכונות: ${name}"><input data-cat-total="${i}" data-cat-index="${j}" type="number" min="1" step="1" inputmode="numeric" placeholder="הזן" value="${oldCat.total??""}" aria-label="סך השאלות: ${name}"></div>`}).join("")}
    </div>
   </div>`;
  }).join("");
@@ -434,7 +434,7 @@ function renderChapterInputs(existing){
   if(hasData&&!confirm("שינוי סוג הפרק יחליף את תתי־הנושאים המוצגים. להמשיך?")){el.value=el.dataset.previous|| (el.value==="verbal"?"quant":"verbal");return}
   input.max=el.value==="quant"?20:23;input.value="";const current=readChapters();current[i].type=el.value;current[i].correct="";current[i].categories=[];renderChapterInputs(current);renderManualPreview();
  }));
- host.querySelectorAll('input[data-correct],input[name="pilotChapter"],input[data-cat-correct],input[data-cat-total]').forEach(el=>el.addEventListener("input",()=>{if(el.matches('[data-cat-correct]')||el.matches('[data-cat-total]')){if(el.value!==""&&Number(el.value)<0)el.value="0";const row=el.closest('.category-input-row');const correct=row?.querySelector('[data-cat-correct]'),total=row?.querySelector('[data-cat-total]');if(correct&&total){correct.max=total.value!==""?total.value:"";}}renderManualPreview()}));
+ host.querySelectorAll('input[data-correct],input[name="pilotChapter"],input[data-cat-correct],input[data-cat-total]').forEach(el=>el.addEventListener("input",()=>{if(el.matches('[data-cat-correct]')||el.matches('[data-cat-total]')){if(el.value!==""&&Number(el.value)<0)el.value="0";const row=el.closest('.category-input-row');const correct=row?.querySelector('[data-cat-correct]'),total=row?.querySelector('[data-cat-total]');if(correct&&total){correct.max=total.value!==""?total.value:"";if(correct.value!==""&&total.value!==""&&Number(correct.value)>Number(total.value))correct.setCustomValidity("מספר התשובות הנכונות לא יכול להיות גדול ממספר השאלות");else correct.setCustomValidity("");}}renderManualPreview()}));
  host.querySelectorAll('input[name="pilotChapter"]').forEach(el=>el.addEventListener("change",renderManualPreview));
  host.querySelectorAll("select[data-type]").forEach(el=>el.dataset.previous=el.value);
 }
